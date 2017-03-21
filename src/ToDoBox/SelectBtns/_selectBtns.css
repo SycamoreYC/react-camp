@@ -1,0 +1,23 @@
+.selectBtns-wrap {
+    display: flex;
+    padding: 20px 20px 0 20px;
+}
+.selectBtns-allUndo {
+    margin: 0 20px;
+}
+.selectBtns {
+    width: 67px;
+    background: #00aaf1;
+    color: #fff;
+    border-radius: 5px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+}
+.selectBtns:hover {
+    background: #43c0f4;
+    cursor: pointer;
+}
+.selectBtns:active {
+    background: #00a9f0;
+}

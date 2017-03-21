@@ -1,0 +1,20 @@
+.toDoList-item-btn {
+    float: right;
+}
+.toDoList-item-btn-ok, .toDoList-item-btn-del {
+    margin-right: 10px;
+    width: 44px;
+    height: 21px;
+}
+.toDoList-item-checkbox {
+    height: 14px;
+    width: 14px;
+    margin-right: 10px;
+}
+.toDoList-item-edit {
+    display: inline-block;
+}
+.toDoList-item-edit > input {
+    margin-left: 10px;
+    padding: 0 4px;
+}

@@ -17,7 +17,7 @@ module.exports = {
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
 
-    './index.js'
+    './index.js',
     // the entry point of our app
   ],
   output: {
@@ -32,14 +32,17 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/
+       {
+         test: /\.js[x]?$/,
+         exclude: /node_modules/,
+         loader: 'babel-loader',
+         query: {
+             presets: ['es2015','react']
+         }
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader?modules', 'postcss-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.scss$/,
@@ -52,7 +55,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
-      title: 'React Todo App',
+      template: './index.html',
       favicon: resolve(__dirname, 'hamburger.ico')
     })
   ]

@@ -1,0 +1,24 @@
+.toDoList-wrap {
+    margin: 20px;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    background: #fff;
+}
+.toDoList-body {
+    list-style: none;
+    text-align: left;
+    margin-bottom: -1px;
+}
+.toDoList-body li {
+    border-bottom: 1px solid #e3e3e3;
+    padding: 10px;
+    margin-top: -1px;
+    border-radius: 5px;
+}
+.toDoList-body li > input {
+    height: 13px;
+}
+.toDoList-body li span {
+    margin-left: 10px;
+    display: inline-block;
+}
