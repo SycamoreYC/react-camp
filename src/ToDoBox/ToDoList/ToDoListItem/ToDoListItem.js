@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 
 import './_ToDoListItem.css';
+import ActionModal from './ActionModal/ActionModal';
 
 
 class ToDoListItem extends Component {
@@ -11,25 +12,9 @@ class ToDoListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditing: false
+            isEditing: false,
+            showModal: false
         }
-    }
-
-    renderActionSection() {
-        if (this.state.isEditing) {
-            return (
-                <span className="toDoList-item-btn">
-                    <button className="toDoList-item-btn-ok" onClick={this.onSave.bind(this)}>save</button>
-                    <button className="toDoList-item-btn-del" onClick={this.onCancel.bind(this)}>cancel</button>
-                </span>
-            )
-        }
-        return (
-            <span className="toDoList-item-btn">
-                    <button className="toDoList-item-btn-ok" onClick={this.onEditing.bind(this)}>edit</button>
-                    <button className="toDoList-item-btn-del" onClick={this.onDelete.bind(this)}>delete</button>
-            </span>
-        )
     }
 
     onCancel() {
@@ -44,68 +29,63 @@ class ToDoListItem extends Component {
         })
     }
 
-    onSave(event) {
-        event.preventDefault();
-        const oldContent = this.props.todo.content;
-        const newContent = this.refs.editInput.value;
-        this.props.saveTask(oldContent, newContent);
-        this.onCancel();
-    }
-
     onDelete(event) {
         event.preventDefault();
-        const targetTask = this.props.todo;
-        this.props.deleteTask(targetTask);
+		const targetIndex = this.props.index;
+        this.props.deleteTask(targetIndex);
+        this.renderModal(false);
+    }
+    renderActionIcon() {
+        return (
+            <i className="iconfont icon-bell toDoList-item-icon" onClick={() => this.renderModal(true)}></i>
+        )
     }
 
-
+    renderModal(state) {
+        this.setState({
+            showModal: state
+        });
+    }
 
     renderTaskSection() {
         const taskStyle = {
             color: this.props.todo.isCompleted ? 'grey' : 'black',
             cursor: 'pointer'
         };
-
-        if (this.state.isEditing) {
-            return (
-                <form className="toDoList-item-edit">
-                    <input type="text" defaultValue={this.props.todo.content} ref="editInput"/>
-                </form>
-            )
-        }
-        if (!this.state.isEditing) {
-            if (this.props.todo.isCompleted === false) {
-                return (
-                        <span className="toDoList-item-content" style={taskStyle}>
-                            <input className="toDoList-item-checkbox"
-                                   type="checkbox"
-                                   onChange={this.onToggle.bind(this)}
-                                   checked={this.props.todo.isCompleted}/>{this.props.todo.content}
-                        </span>
-                    )
-            } else {
-                return (
-                        <span className="toDoList-item-content" style={taskStyle}>
-                                <input className="toDoList-item-checkbox"
-                                       type="checkbox"
-                                       onChange={this.onToggle.bind(this)}
-                                       checked={this.props.todo.isCompleted}/><strike>{this.props.todo.content}</strike>
-                            </span>
-                    )
-            }
-
-        }
+        return (
+            <span className="toDoList-item-content" style={taskStyle}>
+                    <input className="toDoList-item-checkbox"
+                           type="checkbox"
+                           onChange={this.onToggle.bind(this)}
+                           checked={this.props.todo.isCompleted}/>{ this.props.todo.isCompleted ?
+                <strike>{this.props.todo.content}</strike> : <span>{this.props.todo.content}</span> }
+                </span>
+        )
     }
 
     onToggle() {
-        this.props.taskToggle(this.props.todo)
+		this.props.taskToggle(this.props.index);
     }
 
+
     render() {
+        const modalStyle = {
+            display: this.state.showModal? 'block' : 'none'
+        };
         return (
             <li className="toDoList-item" key={this.props.index}>
                 {this.renderTaskSection()}
-                {this.renderActionSection()}
+                {this.renderActionIcon()}
+                <div style={modalStyle}>
+                    <ActionModal closeModal={this.renderModal.bind(this)}
+                                 onEditing={this.onEditing.bind(this)}
+                                 onCancel={this.onCancel.bind(this)}
+                                 saveTask={this.props.saveTask.bind(this)}
+                                 onDelete={this.onDelete.bind(this)}
+                                 isEditing={this.state.isEditing}
+                                 index={this.props.index}
+                                 todo={this.props.todo.content}/>
+                </div>
             </li>
         )
     }

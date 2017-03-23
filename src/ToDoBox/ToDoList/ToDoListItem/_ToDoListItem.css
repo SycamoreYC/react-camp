@@ -18,3 +18,13 @@
     margin-left: 10px;
     padding: 0 4px;
 }
+
+.toDoList-item-icon {
+    float: right;
+    margin-right: 20px;
+    color: #ffcc33
+}
+.toDoList-item-icon:hover {
+    cursor: pointer;
+    transform: rotate(-45deg);
+}

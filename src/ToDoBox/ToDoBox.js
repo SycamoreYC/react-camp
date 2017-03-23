@@ -36,36 +36,49 @@ class ToDoBox extends Component {
     }
 
     addHandle(item) {
-        this.state.toDoData.push({
-            content: item,
-            isCompleted: false
+        // this.state.toDoData.push({
+			// content: item,
+			// isCompleted: false
+        // });
+        const id = this.state.toDoData[this.state.toDoData.length - 1];
+        const newToDoData = this.state.toDoData;
+        newToDoData.push({
+			content: item,
+			isCompleted: false,
+            id: id + 1
         });
-        this.setState({toDos: this.state.toDoData})
+        this.setState({
+            toDos: newToDoData
+        });
+        // this.setState({toDos: [...this.state.toDoData, {
+        //     content: item,
+        //     isCompleted: false
+        // }]})
     }
 
-    saveTask(oldContent, newContent) {
-        const editedTask = _.find(this.state.toDoData, item => item.content === oldContent);
-        editedTask.content = newContent;
+    saveTask(index, newContent) {
+        // bug
+		const toDoData = this.state.toDoData;
+        toDoData[index].content = newContent;
         this.setState({
             toDoData: this.state.toDoData
         })
     }
 
-    deleteTask(task) {
-        const targetItem = _.findIndex(this.state.toDoData, item => item.content === task.content);
-        this.state.toDoData.splice(targetItem, 1);
+    deleteTask(index) {
+        // bug
+		this.state.toDoData.splice(index, 1);
         this.setState({
             toDos: this.state.toDoData
         })
     }
 
-    taskToggle(task) {
-        const targetToggle = _.find(this.state.toDoData, item => item.content === task.content);
-        targetToggle.isCompleted = !targetToggle.isCompleted;
+    taskToggle(index) {
+        const toDoData = this.state.toDoData;
+		toDoData[index].isCompleted = !toDoData[index].isCompleted;
         this.setState({
-            toDoData: this.state.toDoData
+            toDoData: toDoData
         })
-
     }
 
     operateAllTasksHandle(operate) {
@@ -78,7 +91,6 @@ class ToDoBox extends Component {
                 item.isCompleted = operate;
             });
         }
-
 
         this.setState({
             toDos: this.state.toDoData

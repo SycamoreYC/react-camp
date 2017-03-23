@@ -6,10 +6,6 @@ import './_selectBtns.css';
 
 class SelectBtns extends Component {
 
-    // doneAllTasks(event) {
-    //     event.preventDefault();
-    //     this.props.doneAllTasksHandle();
-    // }
     render() {
         return <div className="selectBtns-wrap">
             <div className="selectBtns" onClick={() => this.props.operateAllTasksHandle(true)}>全选</div>

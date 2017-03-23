@@ -13,11 +13,11 @@ class ToDoList extends Component {
         const props = _.omit(this.props, 'toDoItems');
         return _.map(this.props.toDoItems, (item, index) => {
             // ... 为了不用每次将方法专门在toDoListItem上挂一次
-            return <ToDoListItem todo={item} key={index} {...props}/>
+			return <ToDoListItem todo={item} key={index} index={index} {...props}/>
         })
     };
-    render() {
 
+    render() {
         return (
             <div className="toDoList-wrap">
                 <ul className="toDoList-body">
