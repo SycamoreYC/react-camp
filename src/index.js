@@ -6,7 +6,14 @@ import ReactDOM from 'react-dom';
 import ToDoBox from './ToDoBox/ToDoBox';
 import './index.css'
 
+import TodoStore from './todoStore/todoStore';
+
+const todoStore = new TodoStore();
+todoStore.addTodo('吃饭');
+todoStore.addTodo('睡觉');
+todoStore.addTodo('打豆豆');
+
 ReactDOM.render(
-    <ToDoBox />,
+	<ToDoBox todoStore={todoStore} />,
     document.getElementById('root')
 );
