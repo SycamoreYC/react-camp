@@ -36,10 +36,6 @@ class ToDoBox extends Component {
     }
 
     addHandle(item) {
-        // this.state.toDoData.push({
-			// content: item,
-			// isCompleted: false
-        // });
         const id = this.state.toDoData[this.state.toDoData.length - 1];
         const newToDoData = this.state.toDoData;
         newToDoData.push({
@@ -50,10 +46,6 @@ class ToDoBox extends Component {
         this.setState({
             toDos: newToDoData
         });
-        // this.setState({toDos: [...this.state.toDoData, {
-        //     content: item,
-        //     isCompleted: false
-        // }]})
     }
 
     saveTask(index, newContent) {
