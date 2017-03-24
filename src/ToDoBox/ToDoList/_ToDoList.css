@@ -18,7 +18,7 @@
 .toDoList-body li > input {
     height: 13px;
 }
-.toDoList-body li span {
+.toDoList-body li > span {
     margin-left: 10px;
     display: inline-block;
 }

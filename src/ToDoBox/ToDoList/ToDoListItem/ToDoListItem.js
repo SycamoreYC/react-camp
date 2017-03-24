@@ -8,7 +8,6 @@ import './_ToDoListItem.css';
 
 @observer
 class ToDoListItem extends Component {
-
 	renderActionIcon() {
         if (this.props.todo.isCompleted) {
 			return (
@@ -44,42 +43,48 @@ class ToDoListItem extends Component {
 		todo.isCompleted = !todo.isCompleted;
     };
 
-    onAdd() {
-		this.props.addEvent(this.props.todo.content);
+	showDeleteConfirm(state) {
+		this.props.todo.showConfirm = state;
 	}
 
-	showDeleteConfirm = (state) => {
-		this.props.todo.showConfirm = state;
-	};
+    renderDeleteConfirm() {
+		if (this.props.todo.showConfirm === true) {
+    		return (
+				<div className="confirm-mask">
+					<div className="confirm-wrap">
+						<div>真的要删除吗？</div>
+						<span className="confirm-btn" onClick={() => {this.onDelete()}}>一定要删除!</span>
+						<span className="confirm-btn confirm-btn-del" onClick={() => {
+							this.showDeleteConfirm(false);
+						}}>还是不删了吧 :(</span>
+					</div>
+				</div>
+			)
+		}
+	}
 
 	onDelete() {
 		const targetIndex = this.props.index;
 		this.props.deleteEvent(targetIndex);
 	}
 
+	onAdd() {
+		this.props.addEvent(this.props.todo.content);
+	}
+
     render() {
 		const boxStyle = {
             display: this.props.todo.showBox? 'inline' : 'none',
         };
-		console.log(this.props.todo.showConfirm);
-		const confirmStyle = {
-			display: this.props.todo.showConfirm? 'block' : 'none'
-		};
 		return (
             <li className="toDoList-item" key={this.props.index}>
                 {this.renderTaskSection()}
                 {this.renderActionIcon()}
                 <span style={boxStyle} className="toDoList-item-btn-wrap">
-                    <div className="toDoList-item-btn" onClick={() => {this.onAdd()}}>再来一遍</div>
-                    <div className="toDoList-item-btn" onClick={() => {this.showDeleteConfirm(true)}}>删除</div>
+                    <div className="toDoList-item-btn toDoList-item-btn-again" onClick={() => {this.onAdd()}}><i className="iconfont icon-recover toDoList-item-btn－icon"/>再来一遍</div>
+                    <div className="toDoList-item-btn toDoList-item-btn-del" onClick={() => {this.showDeleteConfirm(true)}}><i className="iconfont icon-trash toDoList-item-btn－icon"/>删除</div>
                 </span>
-				<div style={confirmStyle} className="confirm-mask">
-					<div className="confirm-wrap">
-						<div>真的要删除吗？</div>
-						<span className="confirm-btn" onClick={() => {this.onDelete()}}>是的</span>
-						<span className="confirm-btn" onClick={() => {this.showDeleteConfirm(false)}}>还是不删了吧</span>
-					</div>
-				</div>
+				{this.renderDeleteConfirm()}
             </li>
         )
     }

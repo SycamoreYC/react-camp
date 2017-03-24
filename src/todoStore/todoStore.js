@@ -12,7 +12,8 @@ export default class ObservableTodoStore {
 			this.toDoData.push({
 				content: task,
 				isCompleted: false,
-				showBox: false
+				showBox: false,
+				showConfirm: false
 			})
 		}
 	}
@@ -40,7 +41,7 @@ export default class ObservableTodoStore {
 		this.toDoData.forEach(item => {
 			item.showBox = false;
 		});
-		if (index) {
+		if (index || index === 0) {
 			this.toDoData[index].showBox = state;
 		}
 	}

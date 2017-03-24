@@ -1,7 +1,9 @@
 .toDoList-item {
     position: relative;
 }
-
+.toDoList-item-btn {
+    font-size: 12px;
+}
 .toDoList-item-btn:hover {
     cursor: pointer;
 }
@@ -34,9 +36,10 @@
     background: #FFF5EE;
     top: 0;
     right: -10px;
-    padding: 4px 20px;
+    padding: 4px 10px;
     border: 1px solid #e3e3e3;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 .confirm-mask {
     position: fixed;
@@ -65,6 +68,10 @@
     border-radius: 5px;
     font-size: 12px;
     color: #fff;
+    display: inline-block;
+}
+.confirm-btn-del {
+    margin-left: 10px;
 }
 .confirm-btn:hover {
     cursor: pointer;
@@ -72,4 +79,16 @@
 }
 .confirm-btn:active {
     background: #00a9f0;
+}
+.toDoList-item-btn－icon {
+    margin-right: 4px;
+}
+.toDoList-item-btn-again {
+    color: #FF4500;
+}
+.toDoList-item-btn-del {
+    color:#228B22
+}
+.toDoList-item-btn-again:hover, .toDoList-item-btn-del:hover {
+    font-size: 14px;
 }
