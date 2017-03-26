@@ -12,8 +12,8 @@ export default class ObservableTodoStore {
 			this.toDoData.push({
 				content: task,
 				isCompleted: false,
-				showBox: false,
-				showConfirm: false
+				showBox: false
+				// showConfirm: false
 			})
 		}
 	}
@@ -31,7 +31,7 @@ export default class ObservableTodoStore {
 			})
 		} else {
 			this.toDoData.forEach(item => {
-				item.isCompleted = operate;
+				item.isCompleted = operate === 'true';
 			});
 		}
 	}

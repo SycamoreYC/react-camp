@@ -13,6 +13,7 @@
     height: 24px;
     line-height: 24px;
     font-size: 14px;
+    border: none;
 }
 .selectBtns:hover {
     background: #43c0f4;

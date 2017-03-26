@@ -3,11 +3,14 @@
  */
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+
 
 import './_ToDoListItem.css';
 
 @observer
 class ToDoListItem extends Component {
+	@observable confirm = false;
 	renderActionIcon() {
         if (this.props.todo.isCompleted) {
 			return (
@@ -44,11 +47,11 @@ class ToDoListItem extends Component {
     };
 
 	showDeleteConfirm(state) {
-		this.props.todo.showConfirm = state;
+		this.confirm = state;
 	}
 
     renderDeleteConfirm() {
-		if (this.props.todo.showConfirm === true) {
+		if (this.confirm === true) {
     		return (
 				<div className="confirm-mask">
 					<div className="confirm-wrap">
@@ -66,6 +69,7 @@ class ToDoListItem extends Component {
 	onDelete() {
 		const targetIndex = this.props.index;
 		this.props.deleteEvent(targetIndex);
+		this.showDeleteConfirm(false);
 	}
 
 	onAdd() {

@@ -5,12 +5,17 @@ import React, { Component } from 'react';
 import './_selectBtns.css';
 
 class SelectBtns extends Component {
+	test(event) {
+        event.preventDefault();
+        const value = event.target.value;
+        this.props.operateEvent(value);
+	}
 
     render() {
-        return <div className="selectBtns-wrap">
-            <div className="selectBtns" onClick={() => this.props.operateEvent(true)}>全选</div>
-            <div className="selectBtns-allUndo selectBtns" onClick={() => this.props.operateEvent(false)}>全不选</div>
-            <div className="selectBtns" onClick={() => this.props.operateEvent('change')}>反选</div>
+        return <div className="selectBtns-wrap" onClick={this.test.bind(this)}>
+            <button className="selectBtns" value='true'>全选</button>
+            <button className="selectBtns-allUndo selectBtns" value='false'>全不选</button>
+            <button className="selectBtns" value='change'>反选</button>
         </div>
     }
 }
