@@ -14,15 +14,14 @@ class ToDoListItem extends Component {
 	renderActionIcon() {
         if (this.props.todo.isCompleted) {
 			return (
-                <i className="iconfont icon-bell toDoList-item-icon" onClick={(e) => {
-                	e.stopPropagation();
-                	this.renderBox(this.props.index, this.props.todo.showBox)} }/>
+                <i className="iconfont icon-bell toDoList-item-icon" onClick={() => {
+                	this.renderBox(this.props.index)} }/>
 			)
         }
     }
 
-    renderBox(index, state) {
-		this.props.showBoxEvent(index, !state);
+    renderBox(index) {
+		this.props.showBoxEvent(index);
 	}
 
     renderTaskSection() {

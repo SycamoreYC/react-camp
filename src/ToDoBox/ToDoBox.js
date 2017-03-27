@@ -26,14 +26,18 @@ class ToDoBox extends Component {
     	this.props.todoStore.operateToDos(operate);
 	}
 
-	showBoxHandle(index, state) {
-    	this.props.todoStore.showTodoBox(index, state);
+	showBoxHandle(index) {
+    	if (index || index === 0) {
+			this.props.todoStore.showTodoBox(index);
+		} else {
+    		this.props.todoStore.closeTodoBox();
+		}
 	}
 
     render() {
         const { todoStore } = this.props;
 		return (
-            <div className="toDoBox-wrap" onClick={() => this.showBoxHandle()}>
+            <div className="toDoBox-wrap" onClickCapture={() => this.showBoxHandle()}>
                 <h1>To Do List</h1>
                 <ToDoList toDoItems={todoStore.toDoData}
 						  addEvent={this.addHandle.bind(this)}
