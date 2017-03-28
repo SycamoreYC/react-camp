@@ -5,15 +5,16 @@ import { observable } from 'mobx';
 
 export default class ObservableTodoStore {
 	@observable toDoData = [];
+	@observable operateBox = false;
+	@observable itemIndex = null;
+	@observable showConfirm = false;
 
 	// add item
 	addTodo(task) {
 		if (task.trim()) {
 			this.toDoData.push({
 				content: task,
-				isCompleted: false,
-				showBox: false
-				// showConfirm: false
+				isCompleted: false
 			})
 		}
 	}
@@ -36,45 +37,17 @@ export default class ObservableTodoStore {
 		}
 	}
 
-	// show handle box
-	showTodoBox(index, state) {
-		this.toDoData.forEach(item => {
-			item.showBox = false;
-		});
+	// show or hide box menu
+	operateBoxToggle(index, state) {
 		if (index || index === 0) {
-			this.toDoData[index].showBox = state;
+			this.itemIndex = index;
 		}
+		this.operateBox = state;
 	}
 
-	// showToDoBoxAnother
-	showTodoBox(newIndex) {
-		const oldIndex = this.oldIndex;
-		// 点击铃铛和
-		if (oldIndex === undefined) {
-			// 第一次点铃铛
-			this.toDoData[newIndex].showBox = true;
-			this.oldIndex = newIndex;
-		}
-		if (oldIndex || oldIndex === 0) {
-			if (oldIndex === newIndex) {
-				this.toDoData[newIndex].showBox = true;
-			}
-			if (oldIndex !== newIndex) {
-				this.toDoData[oldIndex].showBox = false;
-				this.toDoData[newIndex].showBox = true;
-				this.oldIndex = newIndex;
-			}
-		}
-		if (newIndex === undefined) {
-			this.toDoData[oldIndex].showBox = false;
-		}
-	}
-
-	// close todoBox
-	closeTodoBox() {
-		this.toDoData.forEach(item => {
-			item.showBox = false;
-		})
+	// show or hide confirm modal
+	showConfirmModal(state) {
+		this.showConfirm = state;
 	}
 }
 

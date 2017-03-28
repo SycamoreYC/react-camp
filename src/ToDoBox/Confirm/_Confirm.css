@@ -1,0 +1,39 @@
+.confirm-mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+}
+.confirm-wrap {
+    background: #fff;
+    width: 250px;
+    height: 150px;
+    border-radius: 5px;
+    margin: 200px auto;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.confirm-btn {
+    margin-top: 60px;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    background: #00aaf1;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #fff;
+    display: inline-block;
+}
+.confirm-btn-del {
+    margin-left: 10px;
+}
+.confirm-btn:hover {
+    cursor: pointer;
+    background: #43c0f4;
+}
+.confirm-btn:active {
+    background: #00a9f0;
+}

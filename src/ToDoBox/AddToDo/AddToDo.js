@@ -7,10 +7,11 @@ import { observer } from 'mobx-react';
 
 @observer
 class AddToDo extends Component {
+
     addItemClick(event) {
 		event.preventDefault();
-        const item = this.refs.createItem.value.trim();
-		this.props.addEvent(item);
+        const item = this.refs.createItem.value;
+		this.props.todoStore.addTodo(item);
         this.refs.createItem.value = '';
     }
 

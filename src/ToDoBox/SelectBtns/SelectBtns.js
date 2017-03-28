@@ -8,7 +8,7 @@ class SelectBtns extends Component {
 	test(event) {
         event.preventDefault();
         const value = event.target.value;
-        this.props.operateEvent(value);
+        this.props.todoStore.operateToDos(value);
 	}
 
     render() {

@@ -1,0 +1,25 @@
+
+.toDoList-item-btn {
+    font-size: 12px;
+}
+.toDoList-item-btn:hover {
+    cursor: pointer;
+}
+.toDoList-item-btn-again {
+    color: #FF4500;
+}
+.toDoList-item-btn-del {
+    color:#228B22
+}
+.toDoList-item-btn-again:hover, .toDoList-item-btn-del:hover {
+    font-size: 14px;
+}
+.toDoList-item-btn-wrap {
+    position: absolute;
+    background: #FFF5EE;
+    right: -10px;
+    padding: 4px 10px;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    box-sizing: border-box;
+}

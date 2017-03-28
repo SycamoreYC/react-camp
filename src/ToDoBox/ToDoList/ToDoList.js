@@ -3,22 +3,29 @@
  */
 import React, {Component} from 'react';
 import { observer } from 'mobx-react';
-import _ from 'lodash';
 
 import './_ToDoList.css';
 import ToDoListItem from './ToDoListItem/ToDoListItem';
-
+import OperateBox from './OperateBox/OperateBox';
 
 @observer
 class ToDoList extends Component {
     renderItem() {
-        const props = _.omit(this.props, 'toDoItems');
         const itemArr = [];
-        this.props.toDoItems.forEach((item, index) => {
-			itemArr.push(<ToDoListItem todo={item} key={index} index={index} {...props}/>);
+        const todoStore = this.props.todoStore;
+        todoStore.toDoData.forEach((item, index) => {
+			itemArr.push(<ToDoListItem todo={item} key={index} index={index} todoStore={todoStore} />);
 		});
         return itemArr
     };
+
+    renderBox() {
+        if (this.props.todoStore.operateBox) {
+            return (
+                <OperateBox todoStore={this.props.todoStore}/>
+			)
+        }
+    }
 
     render() {
         return (
@@ -26,6 +33,7 @@ class ToDoList extends Component {
                 <ul className="toDoList-body">
                     {this.renderItem()}
                 </ul>
+                {this.renderBox()}
             </div>
         );
     }

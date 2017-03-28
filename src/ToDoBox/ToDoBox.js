@@ -8,43 +8,29 @@ import './_ToDoBox.css';
 import ToDoList from './ToDoList/ToDoList';
 import AddToDo from './AddToDo/AddToDo';
 import SelectBtns from './SelectBtns/SelectBtns';
+import Confirm from './Confirm/Confirm';
 
 import { observer } from 'mobx-react';
 
 @observer
 class ToDoBox extends Component {
 
-    addHandle(item) {
-		this.props.todoStore.addTodo(item);
-	};
-
-    deleteHandle(index) {
-		this.props.todoStore.deleteToDo(index);
-	}
-
-	operateItemsHandle(operate) {
-    	this.props.todoStore.operateToDos(operate);
-	}
-
-	showBoxHandle(index) {
-    	if (index || index === 0) {
-			this.props.todoStore.showTodoBox(index);
-		} else {
-    		this.props.todoStore.closeTodoBox();
+	renderConfirm() {
+		if (this.props.todoStore.showConfirm) {
+			return (
+				<Confirm todoStore={this.props.todoStore} />
+			)
 		}
 	}
-
     render() {
         const { todoStore } = this.props;
 		return (
-            <div className="toDoBox-wrap" onClickCapture={() => this.showBoxHandle()}>
+            <div className="toDoBox-wrap" onClickCapture={() => todoStore.operateBoxToggle(false)}>
                 <h1>To Do List</h1>
-                <ToDoList toDoItems={todoStore.toDoData}
-						  addEvent={this.addHandle.bind(this)}
-						  showBoxEvent={this.showBoxHandle.bind(this)}
-						  deleteEvent={this.deleteHandle.bind(this)}/>
-                <AddToDo addEvent={this.addHandle.bind(this)} />
-                <SelectBtns operateEvent={this.operateItemsHandle.bind(this)}/>
+				<ToDoList todoStore={todoStore}/>
+                <AddToDo todoStore={todoStore} />
+                <SelectBtns todoStore={todoStore} />
+				{this.renderConfirm()}
             </div>
         );
     }
